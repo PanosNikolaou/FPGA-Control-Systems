@@ -71,32 +71,32 @@ while(x<=600){
 
 	 x=40,y=45;
 
-vga_plot_line(VRAM_BASE,x,y,DISP_GRF_X_MAX-40,y,0x44);
-vga_plot_line(VRAM_BASE,x,45,x,DISP_GRF_Y_MAX-40,0x44);
-vga_plot_line(VRAM_BASE,DISP_GRF_X_MAX-40,45,DISP_GRF_X_MAX-40,DISP_GRF_Y_MAX-40,0x44);
-vga_plot_line(VRAM_BASE,x,DISP_GRF_Y_MAX-40,DISP_GRF_X_MAX-40,DISP_GRF_Y_MAX-40,0x44);
+	vga_plot_line(VRAM_BASE,x,y,DISP_GRF_X_MAX-40,y,0x44);
+	vga_plot_line(VRAM_BASE,x,45,x,DISP_GRF_Y_MAX-40,0x44);
+	vga_plot_line(VRAM_BASE,DISP_GRF_X_MAX-40,45,DISP_GRF_X_MAX-40,DISP_GRF_Y_MAX-40,0x44);
+	vga_plot_line(VRAM_BASE,x,DISP_GRF_Y_MAX-40,DISP_GRF_X_MAX-40,DISP_GRF_Y_MAX-40,0x44);
 
-	 sprintf(SRPM,"%i",set_rpm);
+	sprintf(SRPM,"%i",set_rpm);
 
-vga_wr_bit_str(VRAM_BASE,280,55,"SET RPM:",0x44,1);
-vga_wr_bit_str(VRAM_BASE,345,55,SRPM,0x03,1);
-vga_wr_bit_str(VRAM_BASE,140,410,"Time elapsed:",0x44,1);
-vga_wr_bit_str(VRAM_BASE,360,410,"Duty Cycle :",0x44,1);
-vga_wr_bit_str(VRAM_BASE,45,410,"Status:",0x22,1);
-vga_wr_bit_str(VRAM_BASE,100,55,"Initial RPM:",0x44,1);
+	vga_wr_bit_str(VRAM_BASE,280,55,"SET RPM:",0x44,1);
+	vga_wr_bit_str(VRAM_BASE,345,55,SRPM,0x03,1);
+	vga_wr_bit_str(VRAM_BASE,140,410,"Time elapsed:",0x44,1);
+	vga_wr_bit_str(VRAM_BASE,360,410,"Duty Cycle :",0x44,1);
+	vga_wr_bit_str(VRAM_BASE,45,410,"Status:",0x22,1);
+	vga_wr_bit_str(VRAM_BASE,100,55,"Initial RPM:",0x44,1);
 
-	 sprintf(IRPM,"%i",initRPM);
+	sprintf(IRPM,"%i",initRPM);
 
-vga_wr_bit_str(VRAM_BASE,200,55,IRPM,0x03,1);
-vga_wr_bit_str(VRAM_BASE,20,20,"FPGA Controls Systems",0x00,1);
-vga_wr_bit_str(VRAM_BASE,400,55,"RPM:",0x44,1);
+	vga_wr_bit_str(VRAM_BASE,200,55,IRPM,0x03,1);
+	vga_wr_bit_str(VRAM_BASE,20,20,"FPGA Controls Systems",0x00,1);
+	vga_wr_bit_str(VRAM_BASE,400,55,"RPM:",0x44,1);
 
     xpl=40.0;
     }
 
 if (ypl < YMAX){    // plot if only y is in range
-    j = DISP_GRF_Y_MAX-(ypl/YMAX)*DISP_GRF_Y_MAX;
-    vga_wr_pix(vga_base, xpl++, j, 0x00);
+    	j = DISP_GRF_Y_MAX-(ypl/YMAX)*DISP_GRF_Y_MAX;
+    	vga_wr_pix(vga_base, xpl++, j, 0x00);
     }
 }
 
@@ -105,23 +105,23 @@ int numRevsMotor=0;
 volatile int edge_capture;
 
 void write_pixel(int x, int y, short colour) {
-  volatile short *vga_addr=(volatile short*)(0x08000000 + (y<<10) + (x<<1));
-*vga_addr=colour;
+	volatile short *vga_addr=(volatile short*)(0x08000000 + (y<<10) + (x<<1));
+	*vga_addr=colour;
 }
 
 alt_u8 sseg_32conv_hex(int hex)
 {
-  /* active-low hex digit 7-seg patterns (0-9,a-f); MSB ignored */
-  static const alt_u8 SSEG_HEX_TABLE[16] = {
-    0x40, 0x79, 0x24, 0x30, 0x19, 0x92, 0x02, 0x78, 0x00, 0x10, //0-9
-    0x88, 0x03, 0x46, 0x21, 0x06, 0x0E};                        //a-f
-  alt_u8 ptn;
+  	/* active-low hex digit 7-seg patterns (0-9,a-f); MSB ignored */
+  	static const alt_u8 SSEG_HEX_TABLE[16] = {
+    	0x40, 0x79, 0x24, 0x30, 0x19, 0x92, 0x02, 0x78, 0x00, 0x10, //0-9
+    	0x88, 0x03, 0x46, 0x21, 0x06, 0x0E};                        //a-f
+  	alt_u8 ptn;
 
-  if (hex < 16)
-    ptn = SSEG_HEX_TABLE[hex];
-  else
-    ptn = 0xff;
-  return (ptn);
+  	if (hex < 16)
+    		ptn = SSEG_HEX_TABLE[hex];
+  	else
+    		ptn = 0xff;
+  		return (ptn);
 }
 
 int main(void){
@@ -161,23 +161,23 @@ int main(void){
 
 	 // --------- Σχεδιασμός ορθογωνίων ---------- //
 
-	   for(x=0; x<40; x++)
-	     for(y=0; y<480; y++)
-	       vga_wr_pix(VRAM_BASE, x, y, 0x3B); //3b
-	   for(x=600; x<640; x++)
-	     for(y=0; y<480; y++)
-	       vga_wr_pix(VRAM_BASE, x, y, 0x3B);
-	   for(x=0; x<640; x++)
-	     for(y=0; y<80; y++)
-	       vga_wr_pix(VRAM_BASE, x, y, 0x3B);
-	   for(x=0; x<640; x++)
-	     for(y=400; y<480; y++)
-	       vga_wr_pix(VRAM_BASE, x, y, 0x3B); //DA ,r 0x03
+	for(x=0; x<40; x++)
+		for(y=0; y<480; y++)
+	       		vga_wr_pix(VRAM_BASE, x, y, 0x3B); //3b
+	   	for(x=600; x<640; x++)
+	     		for(y=0; y<480; y++)
+	       			vga_wr_pix(VRAM_BASE, x, y, 0x3B);
+	   	for(x=0; x<640; x++)
+	     		for(y=0; y<80; y++)
+	       			vga_wr_pix(VRAM_BASE, x, y, 0x3B);
+	   	for(x=0; x<640; x++)
+	     		for(y=400; y<480; y++)
+	       			vga_wr_pix(VRAM_BASE, x, y, 0x3B); //DA ,r 0x03
 
 	 // ----------- Επικεφαλίδες ---------------//
 
-vga_wr_bit_str(VRAM_BASE,20,20,"ZNUC II - CYCLONE II PID MOTOR CONTROL SYSTEM",0x00,1);
-vga_wr_bit_str(VRAM_BASE,400,55,"RPM:",0x44,1);
+	 vga_wr_bit_str(VRAM_BASE,20,20,"ZNUC II - CYCLONE II PID MOTOR CONTROL SYSTEM",0x00,1);
+	 vga_wr_bit_str(VRAM_BASE,400,55,"RPM:",0x44,1);
 
 
 	 // ----------- Σχεδιασμός πλεγματος ------//
@@ -209,7 +209,7 @@ vga_wr_bit_str(VRAM_BASE,400,55,"RPM:",0x44,1);
 	 vga_wr_bit_str(VRAM_BASE,140,410,"Time elapsed:",0x44,1);
 	 vga_wr_bit_str(VRAM_BASE,360,410,"Duty Cycle :",0x44,1);
 	 vga_wr_bit_str(VRAM_BASE,45,410,"Status:",0x22,1);
-     vga_wr_bit_str(VRAM_BASE,100,55,"Initial RPM:",0x44,1);
+     	 vga_wr_bit_str(VRAM_BASE,100,55,"Initial RPM:",0x44,1);
 
 	 int previous_duty=0;
 
@@ -269,12 +269,6 @@ vga_wr_bit_str(VRAM_BASE,400,55,"RPM:",0x44,1);
 		   sprintf(strduty,"%i",RPM);
 		   vga_wr_bit_str(VRAM_BASE,440,55,strduty,0x03,1);
 
-		
-
-
-
-
-
 
                // --------------- PID Computation ----------- //
 
@@ -285,11 +279,9 @@ vga_wr_bit_str(VRAM_BASE,400,55,"RPM:",0x44,1);
 		   I_Term = I_Term + I_Gain * Error_term;
 		   duty_cycle = duty_cycle - (P_Term + I_Term + D_Term);
 
-		   // ------------------------------------------ //
-
-
-return_code = altera_avalon_pwm_change_duty_cycle(Z_PWM_0_BASE,duty_cycle);
-if(return_code==-1)  //duty cycle reg must be less than or equal to clock divider
+	return_code = altera_avalon_pwm_change_duty_cycle(Z_PWM_0_BASE,duty_cycle);
+	
+		 if(return_code==-1)  //duty cycle reg must be less than or equal to clock divider
 		   {
 			duty_cycle = previous_duty;
 		      return_code = altera_avalon_pwm_change_duty_cycle(Z_PWM_0_BASE,duty_cycle);
@@ -321,4 +313,3 @@ if(return_code==-1)  //duty cycle reg must be less than or equal to clock divide
 	}
 return 0;
 }
-
