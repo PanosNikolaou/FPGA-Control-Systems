@@ -37,7 +37,6 @@ while(1){
 	sprintf(buffer,"%f",v);
 	printf("%s\r\n",buffer);
 
-
 }
 
 return 0;
