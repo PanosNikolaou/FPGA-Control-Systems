@@ -1,4 +1,3 @@
-
 //Includes
 #include "altera_avalon_timer_regs.h"
 #include "altera_avalon_pio_regs.h"
@@ -16,7 +15,6 @@
 #include "chu_avalon_gpio.h"
 #include "chu_avalon_vga.h"
 #include <stdlib.h>
-
 
 //Function Protypes
 void print_error(unsigned int address, int return_code);
@@ -158,7 +156,6 @@ int main(void){
 
 	 int x,y;
 
-
 	 // --------- Σχεδιασμός ορθογωνίων ---------- //
 
 	for(x=0; x<40; x++)
@@ -193,7 +190,6 @@ int main(void){
 	 x+=10;
 	 }
 
-
 	 // ---------------  Περίγραμμα πλαισίου ----------------//
 
 	 x=40,y=45;
@@ -201,8 +197,6 @@ int main(void){
 	 vga_plot_line(VRAM_BASE,x,45,x,DISP_GRF_Y_MAX-40,0x44);
 	 vga_plot_line(VRAM_BASE,DISP_GRF_X_MAX-40,45,DISP_GRF_X_MAX-40,DISP_GRF_Y_MAX-40,0x44);
 	 vga_plot_line(VRAM_BASE,x,DISP_GRF_Y_MAX-40,DISP_GRF_X_MAX-40,DISP_GRF_Y_MAX-40,0x44);
-
-
 
 	 // ----------------- Επικεφαλιδες ---------------------//
 
@@ -212,10 +206,6 @@ int main(void){
      	 vga_wr_bit_str(VRAM_BASE,100,55,"Initial RPM:",0x44,1);
 
 	 int previous_duty=0;
-
-
-
-
 
 	 while(1){
 		   second_val = 0;
@@ -279,7 +269,7 @@ int main(void){
 		   I_Term = I_Term + I_Gain * Error_term;
 		   duty_cycle = duty_cycle - (P_Term + I_Term + D_Term);
 
-	return_code = altera_avalon_pwm_change_duty_cycle(Z_PWM_0_BASE,duty_cycle);
+		 return_code = altera_avalon_pwm_change_duty_cycle(Z_PWM_0_BASE,duty_cycle);
 	
 		 if(return_code==-1)  //duty cycle reg must be less than or equal to clock divider
 		   {
